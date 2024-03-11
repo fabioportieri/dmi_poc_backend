@@ -19,4 +19,12 @@ Optional Add-ons:
 - The code is expected to be published on GitHub
 - JDK 11, JPA2
 - Postgres
-- 
+
+
+### Build and package
+
+    mvn clean package
+
+### Running
+
+    java -jar target/dmi_poc.jar
