@@ -20,6 +20,21 @@ Optional Add-ons:
 - JDK 11, JPA2
 - Postgres
 
+### Requirements
+
+Set up minio server using the command. 
+
+    podman run \
+    -p 9000:9000 \
+    -p 9001:9001 \
+    -v ~/tmp/miniodata:/data \
+    -e "MINIO_ROOT_USER=ROOTNAME" \
+    -e "MINIO_ROOT_PASSWORD=CHANGEME123" \
+    quay.io/minio/minio server /data --console-address ":9001"
+
+Set up postgres with a new database, `dmi_poc`.
+
+Setup the application code by changing the `application.yml` file in `src/main/resources`
 
 ### Build and package
 
