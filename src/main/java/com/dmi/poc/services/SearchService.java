@@ -4,20 +4,19 @@ import com.dmi.poc.dto.MinioBucket;
 import com.dmi.poc.dto.MinioItem;
 import com.dmi.poc.dto.PagedResponse;
 import com.dmi.poc.dto.SearchParams;
-import io.minio.*;
-import io.minio.errors.*;
+import io.minio.GetPresignedObjectUrlArgs;
+import io.minio.ListObjectsArgs;
+import io.minio.MinioClient;
+import io.minio.Result;
 import io.minio.http.Method;
 import io.minio.messages.Bucket;
 import io.minio.messages.Item;
 import lombok.extern.java.Log;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.StreamSupport;
 
 @Service
 @Log
@@ -27,8 +26,12 @@ public class SearchService {
     final
     MinioClient minioClient;
 
-    public SearchService(MinioClient minioClient) {
+    final
+    AuditServices auditServices;
+
+    public SearchService(MinioClient minioClient, AuditServices auditServices) {
         this.minioClient = minioClient;
+        this.auditServices = auditServices;
     }
 
     public PagedResponse<MinioItem> searchMinioServer(SearchParams searchParams) {
@@ -73,6 +76,7 @@ public class SearchService {
                 searchResult.getContent().add(minioItem);
 
             }
+            this.auditServices.logMessage("search", "Query: "+searchParams+", result count: "+searchResult.getContent().size());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
