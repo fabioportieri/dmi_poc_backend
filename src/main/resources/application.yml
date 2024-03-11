@@ -1,0 +1,33 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  http:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+
+app:
+  minio:
+    host: http://localhost:9000
+    accessKey: rbt6CNmVEl1UiaAS6viB
+    secretKey: Q9jbat71jYHv1ySgjay7Mfyp01tV0c9lYYIXCa6d
+  jwtSecret: JWTSuperSecretKey
+  jwtExpirationInMs: 604800000
+  configuration:
+    uploadProvider: local
+
+logging:
+  level:
+    org:
+      springframework: INFO
+      hibernate:
+        SQL: INFO
+
+debug: false
+
+
