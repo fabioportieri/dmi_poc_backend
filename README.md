@@ -32,7 +32,13 @@ Set up minio server using the command.
     -e "MINIO_ROOT_PASSWORD=CHANGEME123" \
     quay.io/minio/minio server /data --console-address ":9001"
 
+or
+
+docker run -p 9000:9000 -p 9001:9001 -v ~/tmp/miniodata:/data -e "MINIO_ROOT_USER=ROOTNAME" -e "MINIO_ROOT_PASSWORD=CHANGEME123" quay.io/minio/minio server /data --console-address ":9001"
+
 Set up postgres with a new database, `dmi_poc`.
+
+docker run -d --name dmi_poc -e POSTGRES_USER=postgres -e POSTGRES_DB=dmi_poc -e POSTGRES_PASSWORD=lonewolf -e PGDATA=/var/lib/postgresql/data/pgdata -p 5432:5432 postgres
 
 Setup the application code by changing the `application.yml` file in `src/main/resources`
 
