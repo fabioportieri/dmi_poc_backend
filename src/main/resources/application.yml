@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://${db.host:localhost}:${db.port:5432}/${db.name:dmi_poc}?useSSL=false
+    url: jdbc:postgresql://${db.host:localhost}:${db.port:5492}/${db.name:dmi_poc}?useSSL=false
     username: ${db.uid:postgres}
     password: ${db.pwd:lonewolf}
     tomcat:
